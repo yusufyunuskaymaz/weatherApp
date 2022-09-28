@@ -10,7 +10,11 @@ const cityName = document.querySelector(".city-search")
 const citySubmit = document.querySelector(".city-submit")
 
 citySubmit.addEventListener("click", () => {
-  fetchWeatherData(cityName.value)
+  if(cityName.value.trim() == ""){
+    alert("Please enter a city...")
+  }else{
+    fetchWeatherData(cityName.value)
+  }
 })
 
 const updateDom = (data) => {
