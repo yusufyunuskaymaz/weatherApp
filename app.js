@@ -3,7 +3,13 @@ const fetchWeatherData = async (cityName) => {
     `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=605ed0a830c5efab159b66090cd503a6&units=metric`
   );
   const data = await res.json();
-  updateDom(data);
+  if(data.cod == "404"){
+    console.log(data.cod)
+    alert("Please type correct...")
+  }else{
+    console.log(data)
+    updateDom(data)
+  }
 };
 
 const cityName = document.querySelector(".city-search")
@@ -19,9 +25,9 @@ citySubmit.addEventListener("click", () => {
 
 const updateDom = (data) => {
   console.log(data)
-  document.querySelector(".weather").innerHTML = `
-
-    <div class="card mx-auto shadow-lg" style="width: 18rem;">
+  document.querySelector(".row").innerHTML += `
+    <div class="col-3 my-3 scale">
+    <div class="card mx-auto shadow" style="width: 18rem;">
       <div class="ms-auto me-3 mt-2">
         <h4><span class="badge bg-danger">${data.sys.country}</span></h4>
       </div>
@@ -37,7 +43,10 @@ const updateDom = (data) => {
             <li class="list-group-item d-flex align-items-center "><b>Weather:&nbsp </b> ${data.weather[0].description.toUpperCase()} </li>
             <li class="list-group-item"><b>Wind Speed: </b> ${data.wind.speed} </li>
             <li class="list-group-item"><b>Humidity: </b> ${data.main.humidity}</li>
+            <li class="list-group-item"><b>Temp Min-Max: </b> ${data.main.temp_min} - ${data.main.temp_max}</li>
+            ${data.main.sea_level == undefined ? '' : `<li class="list-group-item"><b>Sea Level: </b> ${data.main.sea_level}</li>`}
         </ul>
+    </div>
     </div>
     `;
 };
