@@ -20,16 +20,20 @@ citySubmit.addEventListener("click", () => {
     alert("Please enter a city...")
   }else{
     fetchWeatherData(cityName.value)
+    cityName.value = ""
   }
 })
+
+
 
 const updateDom = (data) => {
   console.log(data)
   document.querySelector(".row").innerHTML += `
     <div class="col-3 my-3 scale">
     <div class="card mx-auto shadow" style="width: 18rem;">
-      <div class="ms-auto me-3 mt-2">
+      <div class="p-2 d-flex justify-content-between align-items-center cardTitle">
         <h4><span class="badge bg-danger">${data.sys.country}</span></h4>
+        <i class="fa-regular fa-circle-xmark pb-2 text-danger" style="font-size:1.5rem"></i>
       </div>
 
             <div class="card-body">
@@ -51,4 +55,19 @@ const updateDom = (data) => {
     `;
 };
 
+window.addEventListener("load", () => {
 
+  if(cityName.value == ""){
+    cityName.value = "van"
+    fetchWeatherData(cityName.value)
+  }
+})
+
+
+const cardRow = document.querySelector(".row")
+
+cardRow.addEventListener("click", (e) => {
+  if(e.target.classList.contains("fa-circle-xmark")){
+    e.target.parentElement.parentElement.parentElement.remove()
+  }
+})
