@@ -25,7 +25,7 @@ citySubmit.addEventListener("click", () => {
 })
 
 
-let count = 1
+let count = 0
 const updateDom = (data) => {
   
   if(count<4){
@@ -56,7 +56,7 @@ const updateDom = (data) => {
     `;
     count++
   }else{
-    alert("You can not select more than 3 cities ")
+    alert("You can not select more than 3 cities, please first delete some... ")
   }
 };
 
@@ -65,6 +65,7 @@ window.addEventListener("load", () => {
   if(cityName.value == ""){
     cityName.value = "van"
     fetchWeatherData(cityName.value)
+    cityName.value = ""
   }
 })
 
@@ -74,5 +75,6 @@ const cardRow = document.querySelector(".row")
 cardRow.addEventListener("click", (e) => {
   if(e.target.classList.contains("fa-circle-xmark")){
     e.target.parentElement.parentElement.parentElement.remove()
+    count--
   }
 })
