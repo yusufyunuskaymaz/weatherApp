@@ -25,10 +25,11 @@ citySubmit.addEventListener("click", () => {
 })
 
 
-
+let count = 1
 const updateDom = (data) => {
-  console.log(data)
-  document.querySelector(".row").innerHTML += `
+  
+  if(count<4){
+    document.querySelector(".row").innerHTML += `
     <div class="col-3 my-3 scale">
     <div class="card mx-auto shadow" style="width: 18rem;">
       <div class="p-2 d-flex justify-content-between align-items-center cardTitle">
@@ -53,6 +54,10 @@ const updateDom = (data) => {
     </div>
     </div>
     `;
+    count++
+  }else{
+    alert("You can not select more than 3 cities ")
+  }
 };
 
 window.addEventListener("load", () => {
