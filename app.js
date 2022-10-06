@@ -29,8 +29,9 @@ let count = 0
 const updateDom = (data) => {
   
   if(count<4){
-    document.querySelector(".row").innerHTML += `
-    <div class="col-3 my-3 scale">
+    let cardDiv = document.createElement("div")
+    cardDiv.className = "col-lg-3 my-3 scale"
+    cardDiv.innerHTML = `
     <div class="card mx-auto shadow" style="width: 18rem;">
       <div class="p-2 d-flex justify-content-between align-items-center cardTitle">
         <h4><span class="badge bg-danger">${data.sys.country}</span></h4>
@@ -52,8 +53,8 @@ const updateDom = (data) => {
             ${data.main.sea_level == undefined ? '' : `<li class="list-group-item"><b>Sea Level: </b> ${data.main.sea_level}</li>`}
         </ul>
     </div>
-    </div>
     `;
+    document.querySelector(".row").prepend(cardDiv)
     count++
   }else{
     alert("You can not select more than 3 cities, please first delete some... ")
