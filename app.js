@@ -64,7 +64,7 @@ const updateDom = (data) => {
 window.addEventListener("load", () => {
 
   if(cityName.value == ""){
-    cityName.value = "van"
+    cityName.value = "hatay"
     fetchWeatherData(cityName.value)
     cityName.value = ""
   }
